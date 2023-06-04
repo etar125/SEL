@@ -21,9 +21,9 @@ namespace sel.Consol
             else if (func == "title")
                 Console.Title = Globl.ConvertS(args);
             else if (func == "foreclr")
-                Console.ForegroundColor = Globl.ParseByName(args);
+                Console.ForegroundColor = Globl.ParseBy(args);
             else if (func == "backclr")
-                Console.BackgroundColor = Globl.ParseByName(args);
+                Console.BackgroundColor = Globl.ParseBy(args);
             else if (func == "getkey")
             {
                 ConsoleKeyInfo k = Console.ReadKey();
@@ -32,6 +32,16 @@ namespace sel.Consol
                 else
                     Program.vars.Add(args, k.Key.ToString());
             }
+            else if (func == "sgetkey")
+            {
+                ConsoleKeyInfo k = Console.ReadKey(true);
+                if (Program.vars.ContainsKey(args))
+                    Program.vars[args] = k.Key.ToString();
+                else
+                    Program.vars.Add(args, k.Key.ToString());
+            }
+            else if (func == "pause")
+                Console.ReadKey(true);
             else if (func == "getline")
             {
                 string k = Console.ReadLine();
