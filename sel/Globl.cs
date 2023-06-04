@@ -40,6 +40,28 @@ namespace sel
                 return new string[] { text, "" };
             return new string[] { first, second };
         }
+        public static string[] SplitBy(string text, char sym)
+        {
+            string first = "";
+            string second = "";
+            if (text.Contains(sym))
+            {
+                int m = 0;
+                for (int a = 0; a < text.Length; a++)
+                {
+                    if (text[a] == sym)
+                    {
+                        m = a;
+                        break;
+                    }
+                }
+                first = text.Substring(0, m);
+                second = text.Substring(m + 1);
+            }
+            else
+                return new string[] { "sel", text };
+            return new string[] { first, second };
+        }
 
         public static int GetLastIndex(string text, char sym)
         {

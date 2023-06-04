@@ -50,15 +50,6 @@ namespace sel.Consol
                 else
                     Program.vars.Add(args, k);
             }
-            else if (func == "goto")
-            {
-                if (Program.funcs.ContainsKey(args))
-                    Program.i = Program.funcs[args];
-            }
-            else if (func == "gotoline")
-            {
-                Program.i = int.Parse(args);
-            }
             //Globl.met = Globl.Status.Complete;
         }
     }
