@@ -89,9 +89,8 @@ namespace sel
             return das;
         }
 
-        public static ConsoleColor ParseByName(string color)
+        public static ConsoleColor ParseBy(string color)
         {
-            // no comments
             string clr = color.ToLower();
             if (clr == "white")
                 return ConsoleColor.White;
@@ -126,6 +125,11 @@ namespace sel
             else if (clr == "darkyellow")
                 return ConsoleColor.DarkYellow;
             return ConsoleColor.White;
+        }
+
+        public static ConsoleColor ParseBy(int color)
+        {
+            return (ConsoleColor)color;
         }
     }
 }
