@@ -42,32 +42,34 @@ namespace sel
                 }
                 for (int ih = 0; ih < cln.Length; ih++)
                 {
-                    if (cln[ih] != "begin")
-                    {
-                        string[] sl = Globl.SplitByFirst(cln[ih], ' ');
-                        vars.Add(sl[0], Globl.ConvertS(sl[1]));
-                    }
-                    else
-                    {
-                        ln = new string[cln.Length - 1];
-                        for (int k = ih + 1; k < ln.Length; k++)
+                    //try
+                    //{
+                        if (cln[ih] != "begin" && cln[ih] != String.Empty)
                         {
-                            ln[k] = cln[k];
+                            string[] sl = Globl.SplitByFirst(cln[ih], ' ');
+                            vars.Add(sl[0], Globl.ConvertS(sl[1]));
                         }
-                    }
+                        else
+                        {
+                            ln = cln;
+                            i = ih + 1;
+                            break;
+                        }
+                    //}
+                    //catch (Exception e) { Console.WriteLine("Line::" + ih + "\nText::" + cln[ih] + "\nError::" + e.Message); Console.ReadKey(true); Environment.Exit(0); }
                 }
-                for (i = 0; i < ln.Length; i++)
+                for (i = i; i < ln.Length; i++)
                 {
                     string tk = ln[i];
-                    try
-                    {
+                    //try
+                    //{
                         if (tk.StartsWith("func "))
                         {
                             string[] sl = Globl.SplitByFirst(tk, ' ');
                             funcs.Add(sl[1], i);
                         }
-                    }
-                    catch (Exception e) { Console.WriteLine("Line::" + i + "\nText::" + tk + "\nError::" + e.Message); Console.ReadKey(true); Environment.Exit(0); }
+                    //}
+                    //catch (Exception e) { Console.WriteLine("Line::" + i + "\nText::" + tk + "\nError::" + e.Message); Console.ReadKey(true); Environment.Exit(0); }
                 }
                 DoCode(funcs["main"]);
             }
@@ -81,8 +83,8 @@ namespace sel
             for (i = index; i < ln.Length && !endof; i++)
             {
                 string tk = ln[i];
-                try
-                {
+                //try
+                //{
                     string[] sl = Globl.SplitByFirst(tk, ' ');
                     string[] ll = sl[0].Split(new string[] { "." }, StringSplitOptions.None);
                     if (ll[0] == "end")
@@ -100,7 +102,7 @@ namespace sel
                     }
                     else
                     {
-                        if (ll[1] == "console")
+                        if (sl[1] == "console")
                         {
                             for (int ih = i; ih < ln.Length; ih++)
                             {
@@ -115,8 +117,8 @@ namespace sel
                             }
                         }
                     }
-                }
-                catch (Exception e) { Console.WriteLine("Line::" + i + "\nText::" + tk + "\nError::" + e.Message); Console.ReadKey(true); Environment.Exit(0); }
+                //}
+                //catch (Exception e) { Console.WriteLine("Line::" + i + "\nText::" + tk + "\nError::" + e.Message); Console.ReadKey(true); Environment.Exit(0); }
             }
         }
 
