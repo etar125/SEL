@@ -22,23 +22,15 @@ namespace sel
         {
             string file = "main.sel";
             foreach (string s in args)
-                if (File.Exists(s) && s.EndsWith(".sel"))
-                    file = s;
+            {
+                if (File.Exists(s) && s.EndsWith(".sel")) { file = s; }
+            }
             if (File.Exists(file))
             {
                 string[] cln = File.ReadAllLines(file);
                 for (int ih = 0; ih < cln.Length; ih++)
                 {
-                    string lna = cln[ih];
-                    for (int ii = 0; ii < lna.Length; ii++)
-                    {
-                        if (lna[ii] != ' ')
-                        {
-                            lna = lna.Remove(0, ii);
-                            break;
-                        }
-                    }
-                    cln[ih] = lna;
+                    cln[ih] = cln[ih].Trim();
                 }
                 for (int ih = 0; ih < cln.Length; ih++)
                 {
@@ -86,9 +78,8 @@ namespace sel
                 //try
                 //{
                     string[] sl = Globl.SplitByFirst(tk, ' ');
-                    string[] ll = sl[0].Split(new string[] { "." }, StringSplitOptions.None);
-                    if (ll[0] == "end")
-                        break;
+                    string[] ll = Globl.SplitBy(sl[0], '.');
+                    if (ll[0] == "end") { break; }
                     if (ll[0] != "using")
                     {
                         if (ll[0] == "console")
@@ -98,6 +89,10 @@ namespace sel
                         else if (ll[0] == "variable")
                         {
                             Vars.Do(ll[1], sl[1], i);
+                        }
+                        else if (ll[0] == "sel")
+                        {
+                            Other.Do(ll[1], sl[1]);
                         }
                     }
                     else
@@ -110,13 +105,25 @@ namespace sel
                                 {
                                     endof = true; break;
                                 }
-                                if (ln[ih] == "enduse")
-                                    break;
-                                string[] sla = Globl.SplitByFirst(ln[ih], ' ');
+                                if (ln[ih] == "enduse") { break; }
+                            string[] sla = Globl.SplitByFirst(ln[ih], ' ');
                                 Base.Do(sla[0], sla[1]);
                             }
                         }
-                    }
+                        else if (sl[1] == "variable")
+                        {
+                            for (int ih = i; ih < ln.Length; ih++)
+                            {
+                                if (ln[ih] == "end")
+                                {
+                                    endof = true; break;
+                                }
+                                if (ln[ih] == "enduse") { break; }
+                            string[] sla = Globl.SplitByFirst(ln[ih], ' ');
+                                Vars.Do(ll[1], sl[1], i);
+                            }
+                        }
+                }
                 //}
                 //catch (Exception e) { Console.WriteLine("Line::" + i + "\nText::" + tk + "\nError::" + e.Message); Console.ReadKey(true); Environment.Exit(0); }
             }
@@ -126,8 +133,7 @@ namespace sel
         {
             for (int ia = startIndex; ia < ln.Length; ia++)
             {
-                if (ln[ia] == "end")
-                    break;
+                if (ln[ia] == "end") { break; }
                 if (ln[ia] == text)
                 {
                     return ia;
