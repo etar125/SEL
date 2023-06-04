@@ -1,6 +1,0 @@
-c:\users\etar125\documents\visual studio 2015\Projects\sel\sel\bin\Debug\sel.exe.config
-c:\users\etar125\documents\visual studio 2015\Projects\sel\sel\bin\Debug\sel.exe
-c:\users\etar125\documents\visual studio 2015\Projects\sel\sel\bin\Debug\sel.pdb
-c:\users\etar125\documents\visual studio 2015\Projects\sel\sel\obj\Debug\sel.csprojResolveAssemblyReference.cache
-c:\users\etar125\documents\visual studio 2015\Projects\sel\sel\obj\Debug\sel.exe
-c:\users\etar125\documents\visual studio 2015\Projects\sel\sel\obj\Debug\sel.pdb
